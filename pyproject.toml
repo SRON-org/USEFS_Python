@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "USEFS_Python" 
-version = "0.1.0" 
+version = "0.2.0" 
 description = "USEFS access framework for Python"
 authors = [{ name = "SRInternet", email = "srinternet@qq.com" }] 
 license = { file = "LICENSE" }
