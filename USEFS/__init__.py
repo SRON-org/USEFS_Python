@@ -177,11 +177,11 @@ class USEFSParser:
         if not re.match(r"^\d+(\.\d+)?[smhd]$", item['duration']):
              raise ValueError(f"Invalid duration format: {item['duration']}.  Use 's' (seconds), 'm' (minutes), 'h' (hours), or 'd' (days) as units (e.g., 7200s, 120m, 2h, 0.5d).")
 
-        # 验证item的enable是否覆盖collection的enable设置
-        if 'enable' in item:
-            enable = item['enable']
-            if enable != "once":
-                raise ValueError("Collection Item can only override 'enable' with 'once'")
+        # # 验证item的enable是否覆盖collection的enable设置
+        # if 'enable' in item:
+        #     enable = item['enable']
+        #     if enable != "once":
+        #         raise ValueError("Collection Item can only override 'enable' with 'once'")
 
 
     def get_version(self) -> Union[int, None]:
