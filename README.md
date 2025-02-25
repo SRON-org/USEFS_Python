@@ -35,7 +35,34 @@ pip install USEFS_Python
 
 ## 使用说明
 
-### 1. 导入模块
+### 创建文件
+
+#### 1. 导入模块
+
+首先，你需要导入必要的模块和函数：
+
+```python
+from USEFS import new
+```
+
+#### 2. 创建新文件
+
+```python
+# 以创建 yaml 格式的 USEFS 文件为例
+new("new.yaml")
+```
+
+代码中的 ```new``` 文件名可以任意更改，文件扩展名可以为 ```.yaml``` 格式、```.toml``` 格式和 ```.json``` 格式。
+
+```new()``` 方法会返回新创建的 USEFS 文件的绝对路径，你可以用一个变量来接受他：
+
+```python
+file_path = new("new.yaml")
+```
+
+### 解析与编辑文件
+
+#### 1. 导入模块
 
 首先，你需要导入必要的模块和函数：
 
@@ -47,7 +74,7 @@ from typing import Union, Dict, Any
 
 **注意**：```USEFS_YamlParser```, ```USEFS_TomlParser``` 和 ```USEFS_JsonParser``` 分别用于解析 ```.yaml``` 格式、```.toml``` 格式和 ```.json``` 格式的 USEFS 文件。本文以 ```.yaml``` 格式举例，不同文件格式解析的差别仅仅是使用不同的 Parser 来构建相应的解析器对象，以进一步获取 USEFS 文件的内容。
 
-### 2. 加载文件 -> 构建解析器
+#### 2. 加载文件 -> 构建解析器
 
 ```python
 file_path = "my_data.yaml"
@@ -56,11 +83,11 @@ parser = USEFS_YamlParser(file_path)
 
 **注意：** 后续的*所有*操作都必须使用这个 `parser` 对象。 如果 `parser` 为 `None`，说明加载 USEFS 文件失败，你需要检查文件路径、文件类型和文件内容是否正确
 
-### 3. 进行操作
+#### 3. 进行操作
 
 现在，你可以使用 `parser` 对象进行各种操作。
 
-#### 获取和打印基本信息
+##### 获取和打印基本信息
 
 ```python
     print(f"Version: {parser.get_version()}")
@@ -76,7 +103,7 @@ parser = USEFS_YamlParser(file_path)
             print(f"    Content Item Name: {content['name']}, Time: {content['from_time']}")
 ```
 
-#### 添加新的日程项
+##### 添加新的日程项
 
 ```python
 new_item = {
@@ -94,7 +121,7 @@ new_item = {
 parser.add_item(new_item)
 ```
 
-#### 添加新的日程集合
+##### 添加新的日程集合
 
 ```python
 new_collection = {
@@ -108,19 +135,19 @@ new_collection = {
 parser.add_collection(new_collection)
 ```
 
-#### 移除日程项
+##### 移除日程项
 
 ```python
 parser.remove_item("返还图书")  # 替换为要移除的日程项名称
 ```
 
-#### 移除日程集合
+##### 移除日程集合
 
 ```python
 parser.remove_collection("旧课程表")  # 替换为要移除的日程集合名称
 ```
 
-#### 向现有的日程集合添加日程项
+##### 向现有的日程集合添加日程项
 
 ```python
 collection_name = "课表-周一"  # 替换为现有的集合名称
@@ -135,7 +162,7 @@ new_collection_item = {
 parser.add_item_to_collection(collection_name, new_collection_item)
 ```
 
-#### 更新现有日程集合中的日程项
+##### 更新现有日程集合中的日程项
 
 ```python
 collection_name = "课表-周一"
@@ -151,14 +178,14 @@ updated_item = {
 parser.update_item_in_collection(collection_name, item_name_to_update, updated_item)
 ```
 
-#### 从日程集合中移除日程项
+##### 从日程集合中移除日程项
 
 ```python
 collection_name = "课表-周一"
 parser.remove_item_from_collection(collection_name, "数学")
 ```
 
-#### 查找日程
+##### 查找日程
 
 ```python
 schedule_name = "健身"  # 替换为要查找的日程名称
@@ -169,7 +196,7 @@ if schedule_info:
         print(f"  {key}: {value}")
 ```
 
-#### 获取日程状态
+##### 获取日程状态
 
 ```python
 item_name_to_check = "健身"
@@ -181,7 +208,7 @@ if schedule_status:
 
 更多详细的功能模板，请参见 [usefs_functions_example.py](./examples/usefs_functions_example.py)
 
-### 4. 保存更改
+#### 4. 保存更改
 
 最后，使用 `save` 方法保存所有更改：
 
