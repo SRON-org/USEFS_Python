@@ -38,7 +38,43 @@ except ImportError:
     print("Error: toml library not found. Please install it using 'pip install toml'.")
     sys.exit(1)
 
+def new(file_path :str) -> str:
+    """
+    Create a new USEFS (version 1) file, and return the absolute path to the file.
 
+
+    Args:
+        file_path (str): Path to the new USEFS file.
+    """
+
+    _, ext = os.path.splitext(file_path)
+    extention: str = ext[1:].lower()
+    match extention:
+        case "json":
+            content = '''{
+"version": 1,
+"items": [],
+"collections": []
+}'''
+        case "yaml":
+            content = '''version: 1 
+items: []
+collections: []'''
+        case "toml":
+            content = '''version = 1
+items = []
+collections = []'''
+        case _:
+            raise TypeError(f"USEFS files are only supported in json, yaml, and toml formats, the provided format '{extention}' is not supported.")
+
+    if not os.path.exists(file_path):
+        with open(file_path, "w", encoding='utf-8') as f:
+            f.write(content)
+            f.close()
+
+        return os.path.abspath(file_path)
+    else:
+        raise FileExistsError(f"File is already exist: {file_path}")
 
 class USEFSParser:
     """
@@ -59,7 +95,6 @@ class USEFSParser:
         self.collections = []
         self.data = {}  # Store the loaded data
         self.load_data(file_path)
-
 
     def load_data(self, file_path: str) -> None:
       """
