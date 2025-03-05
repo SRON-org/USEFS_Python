@@ -4,6 +4,8 @@
 
 # USEFS_Python
 
+[![Version](https://img.shields.io/badge/version-0.3.1_beta-orange.svg)](VERSION)
+
 USEFS access framework for Python
 
 #### [Main Repo](https://github.com/SRON-org/USEFS)
@@ -14,7 +16,7 @@ USEFS access framework for Python
 
 USEFS_Python 是一个Python库，提供对使用 USEF 架构 格式的文件的进行访问、修改、增添、删除等高级管理功能。它简单、快速、便捷，能大幅提高 USEFS 在 Python 上的开发效率。
 
-## 特性
+## 功能
 
 - [x] 读取 USEFS 文件（YAML, TOML, JSON 格式）
 - [x] 添加、删除和修改顶级日程项 (items)
@@ -23,6 +25,7 @@ USEFS_Python 是一个Python库，提供对使用 USEF 架构 格式的文件的
 - [x] 查找现有的日程
 - [x] 确定日程的当前状态（未开始、进行中、等待下一次循环、已结束）
 - [x] 将更改保存到 USEFS 文件
+- [ ] 判断日程循环为单、双周
 - [ ] 解析 RRULE 格式的日程循环设置
 - [ ] 校验 USEFS 文件的有效性和完整性
 
